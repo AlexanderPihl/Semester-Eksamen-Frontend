@@ -19,3 +19,8 @@
     user         popcorn
     admin        popcorn
     user_admin   popcorn
+
+## View the frontend interact with the deployed backend
+Turn of ad blocker when accessing the admin page - thank me later ;-)
+ 
+[http://alex_ca3_boilerplate_frontend.surge.sh/](http://alex_ca3_boilerplate_frontend.surge.sh/)
