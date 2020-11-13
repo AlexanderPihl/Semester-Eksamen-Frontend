@@ -5,6 +5,7 @@ import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import AllJokes from "./AllJokes";
 import AllScrape from "./AllScrape";
 import Login from "./Login";
+import AllQuotes from "./Admin";
 import { Switch, Route, NavLink, useHistory } from "react-router-dom";
 
 const Header = ({ isLoggedIn, loginMsg, isAdmin, loginName }) => {
@@ -137,6 +138,7 @@ function Admin() {
   return (
     <div className="pageContent">
       <h2>Admin</h2>
+      <AllQuotes />
     </div>
   );
 }
