@@ -73,16 +73,28 @@ const AllQuotes = () => {
                     </Col>
                 </Row>
                 <br></br>
-                {/*                 <Row>
+                <Row>
+                    <br></br>
+                    <p>
+                        The code for "Get quote(s)" was me trying to implement af table of a number of quotes decided by the user.
+                        <br></br>
+                        I didnt manage to get it to work because of my JSON objects are indside an array and therefore i
+                        <br></br>
+                        could not get map to work properly in time for hand in...
+                        <br></br>
+                        I can get them all by stringify them
+                    </p>
                     <Col>
                         <p>
-                             <td>{JSON.stringify(quote)}</td> 
+                            <td>{JSON.stringify(quote)}</td>
                             {
                                 quote.tags && quote.tags.map(element =>
-                                    <div>
-                                        <p>{element.quote} </p>
-                                    </div>
+                                    <tbody key={element.url}>
+                                        <tr><th>url:</th><td>{element.quote}</td></tr>
+                                        <tr><th>divCount:</th><td>{element.author}</td></tr>
+                                        <tr><td colSpan="2">&nbsp;</td></tr>
 
+                                    </tbody>
                                 )}
                         </p>
                         <Form onChange={onSubmit} className="mt-4" label="">
@@ -97,7 +109,7 @@ const AllQuotes = () => {
                         </Form>
                     </Col>
                 </Row>
- */}
+
             </Container>
         </div>
     );
