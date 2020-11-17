@@ -6,43 +6,40 @@ import logo from './bBad.jpeg';
 const AllQuotes = () => {
 
     const init = { QuoteNum: "" }
-    const [quote, setQuote] = useState(init);
+    const [quotes, setQuotes] = useState([]);
+    const [num, setNum] = useState();
 
-    const fetchAllQuotes = () => {
+    const fetchRandomQuote = () => {
         fetch(URLQuotes)
             .then(res => res.json())
             .then(data => {
-                setQuote(data[0]);
+                setQuotes(data);
             })
     }
 
-    //loads quote first time
+    //loads random quote first time
     useEffect(() => {
-        fetchAllQuotes();
+        fetchRandomQuote();
     }, []);
 
-    const fetchQuote = (quote) => {
-        const URL = URLQuotes + "/" + quote;
+    const fetchQuote = () => {
+        const URL = URLQuotes + "/" + num;
         fetch(URL)
             .then((res) => res.json())
             .then((data) => {
-                setQuote(data);
+                setQuotes(data);
             });
     };
 
-    const getQuote = (evt) => {
+    const getNumberOfQuotes = (evt) => {
         evt.preventDefault();
-        fetchQuote(quote);
-
-        console.log(quote)
+        fetchQuote();
     };
 
-    const onSubmit = (evt) => {
+    const onChange = (evt) => {
         evt.preventDefault();
         const num = evt.target.value;
-        setQuote(num);
-        console.log(num)
-
+        setNum(num);
     };
 
     return (
@@ -63,48 +60,30 @@ const AllQuotes = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>{quote.author}</td>
-                                    <td>{quote.quote}</td>
-                                </tr>
+                                {
+                                    quotes.map(element => {
+                                        return (
+                                            <tr>
+                                                <td>{element.author}</td>
+                                                <td>{element.quote}</td>
+                                            </tr>
+                                        )
+                                    }
+                                    )}
                             </tbody>
                         </Table>
-                        <Button variant="primary mt-3" onClick={() => fetchAllQuotes()}>Get new quote</Button>
                     </Col>
                 </Row>
-                <br></br>
                 <Row>
-                    <br></br>
-                    <p>
-                        The code for "Get quote(s)" was me trying to implement af table of a number of quotes decided by the user.
-                        <br></br>
-                        I didnt manage to get it to work because of my JSON objects are indside an array and therefore i
-                        <br></br>
-                        could not get map to work properly in time for hand in...
-                        <br></br>
-                        I can get them all by stringify them
-                    </p>
                     <Col>
-                        <p>
-                            <td>{JSON.stringify(quote)}</td>
-                            {
-                                quote.tags && quote.tags.map(element =>
-                                    <tbody key={element.url}>
-                                        <tr><th>url:</th><td>{element.quote}</td></tr>
-                                        <tr><th>divCount:</th><td>{element.author}</td></tr>
-                                        <tr><td colSpan="2">&nbsp;</td></tr>
-
-                                    </tbody>
-                                )}
-                        </p>
-                        <Form onChange={onSubmit} className="mt-4" label="">
+                        <Form onChange={onChange} className="mt-4" label="">
                             <Form.Control
                                 type="text"
                                 id="QuoteNum"
-                                placeholder="please enter a number"
+                                placeholder="Input number of quotes you want"
                             />
-                            <Button onClick={getQuote} variant="primary" type="submit">
-                                Get quote(s)
+                            <Button onClick={getNumberOfQuotes} variant="primary" type="submit">
+                                Get quotes
                             </Button>
                         </Form>
                     </Col>
